@@ -1,27 +1,25 @@
 const duracionGiro = 400; // milliseconds
-const slotElements = document.querySelectorAll(".slot");
+const elementos = document.querySelectorAll(".slot");
 const giroBoton = document.getElementById("spin-btn");
 
 function obtenerAleatorios() {
     return Math.floor(Math.random() * 10).toString();
 }
 
-function spin() {
+function giro() {
     giroBoton.disabled = true;
 
     const valores = [obtenerAleatorios(), obtenerAleatorios(), obtenerAleatorios()];
-    const comienzo = [Date.now(), Date.now(), Date.now()];
+    const comienzo = [Date.now()];
 
     function updateSlot(slotIndex) {
         const ahora = Date.now();
-        const tiempTrans = ahora - comienzo[slotIndex];
-
+        const tiempTrans = ahora - comienzo;
         if (tiempTrans < duracionGiro) {
-            const randomIndex = Math.floor(Math.random() * 10);
-            slotElements[slotIndex].textContent = randomIndex;
+            elementos[slotIndex].textContent = Math.floor(Math.random() * 10);
             requestAnimationFrame(() => updateSlot(slotIndex));
         } else {
-            slotElements[slotIndex].textContent = valores[slotIndex];
+            elementos[slotIndex].textContent = valores[slotIndex];
 
             if (slotIndex === 2) {
                 ganaONo();
@@ -30,24 +28,24 @@ function spin() {
         }
     }
 
-    for (let i = 0; i < slotElements.length; i++) {
+    for (let i = 0; i < elementos.length; i++) {
         updateSlot(i);
     }
 }
 
 function ganaONo() {
     if (
-        slotElements[0].textContent === slotElements[1].textContent &&
-        slotElements[1].textContent === slotElements[2].textContent
+        elementos[0].textContent === elementos[1].textContent &&
+        elementos[1].textContent === elementos[2].textContent
     ) {
         alert("¡Has ganado! Los tres slots coinciden!");
     } else if (
-        slotElements[0].textContent === slotElements[1].textContent ||
-        slotElements[1].textContent === slotElements[2].textContent ||
-        slotElements[0].textContent === slotElements[2].textContent
+        elementos[0].textContent === elementos[1].textContent ||
+        elementos[1].textContent === elementos[2].textContent ||
+        elementos[0].textContent === elementos[2].textContent
     ) {
         alert("¡Has ganado! Coinciden dos slots");
     }
 }
 
-giroBoton.addEventListener("click", spin);
+giroBoton.addEventListener("click", giro);
