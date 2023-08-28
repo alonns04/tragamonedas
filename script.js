@@ -1,4 +1,4 @@
-const duracionGiro = 600;
+const duracionGiro = 400;
 const elementos = document.querySelectorAll(".slot");
 const giroBoton = document.getElementById("spin-btn");
 
