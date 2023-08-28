@@ -1,4 +1,4 @@
-const duracionGiro = 400; // milliseconds
+const duracionGiro = 600;
 const elementos = document.querySelectorAll(".slot");
 const giroBoton = document.getElementById("spin-btn");
 
@@ -12,16 +12,15 @@ function giro() {
     const valores = [obtenerAleatorios(), obtenerAleatorios(), obtenerAleatorios()];
     const comienzo = [Date.now()];
 
-    function updateSlot(slotIndex) {
+    function girarUnaVez(indice) {
         const ahora = Date.now();
         const tiempTrans = ahora - comienzo;
         if (tiempTrans < duracionGiro) {
-            elementos[slotIndex].textContent = Math.floor(Math.random() * 10);
-            requestAnimationFrame(() => updateSlot(slotIndex));
+            elementos[indice].textContent = Math.floor(Math.random() * 10);
+            requestAnimationFrame(() => girarUnaVez(indice));
         } else {
-            elementos[slotIndex].textContent = valores[slotIndex];
-
-            if (slotIndex === 2) {
+            elementos[indice].textContent = valores[indice];
+            if (indice === 2) {
                 ganaONo();
                 giroBoton.disabled = false;
             }
@@ -29,7 +28,7 @@ function giro() {
     }
 
     for (let i = 0; i < elementos.length; i++) {
-        updateSlot(i);
+        girarUnaVez(i);
     }
 }
 
@@ -38,13 +37,17 @@ function ganaONo() {
         elementos[0].textContent === elementos[1].textContent &&
         elementos[1].textContent === elementos[2].textContent
     ) {
-        alert("¡Has ganado! Los tres slots coinciden!");
+        setTimeout(function() {
+            alert("¡Has ganado! Los TRES(3) slots coinciden!")
+        }, 1);        
     } else if (
         elementos[0].textContent === elementos[1].textContent ||
         elementos[1].textContent === elementos[2].textContent ||
         elementos[0].textContent === elementos[2].textContent
     ) {
-        alert("¡Has ganado! Coinciden dos slots");
+        setTimeout(function() {
+            alert("¡Has ganado! Los DOS(2) slots coinciden!")
+        }, 1);        
     }
 }
 
