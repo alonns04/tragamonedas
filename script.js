@@ -1,23 +1,22 @@
-const spinDuration = 400; // milliseconds
+const duracionGiro = 400; // milliseconds
 const slotElements = document.querySelectorAll(".slot");
-const spinButton = document.getElementById("spin-btn");
+const giroBoton = document.getElementById("spin-btn");
 
-function getRandomSlotValue() {
+function obtenerAleatorios() {
     return Math.floor(Math.random() * 10).toString();
 }
 
 function spin() {
-    spinButton.disabled = true;
+    giroBoton.disabled = true;
 
-    const valores = [getRandomSlotValue(), getRandomSlotValue(), getRandomSlotValue()];
+    const valores = [obtenerAleatorios(), obtenerAleatorios(), obtenerAleatorios()];
     const comienzo = [Date.now(), Date.now(), Date.now()];
 
     function updateSlot(slotIndex) {
         const ahora = Date.now();
         const tiempTrans = ahora - comienzo[slotIndex];
 
-        if (tiempTrans < spinDuration) {
-            const progress = tiempTrans / spinDuration;
+        if (tiempTrans < duracionGiro) {
             const randomIndex = Math.floor(Math.random() * 10);
             slotElements[slotIndex].textContent = randomIndex;
             requestAnimationFrame(() => updateSlot(slotIndex));
@@ -25,8 +24,8 @@ function spin() {
             slotElements[slotIndex].textContent = valores[slotIndex];
 
             if (slotIndex === 2) {
-                checkWin();
-                spinButton.disabled = false;
+                ganaONo();
+                giroBoton.disabled = false;
             }
         }
     }
@@ -36,7 +35,7 @@ function spin() {
     }
 }
 
-function checkWin() {
+function ganaONo() {
     if (
         slotElements[0].textContent === slotElements[1].textContent &&
         slotElements[1].textContent === slotElements[2].textContent
@@ -51,4 +50,4 @@ function checkWin() {
     }
 }
 
-spinButton.addEventListener("click", spin);
+giroBoton.addEventListener("click", spin);
