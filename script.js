@@ -9,20 +9,20 @@ function getRandomSlotValue() {
 function spin() {
     spinButton.disabled = true;
 
-    const targetValues = [getRandomSlotValue(), getRandomSlotValue(), getRandomSlotValue()];
-    const startTimes = [Date.now(), Date.now(), Date.now()];
+    const valores = [getRandomSlotValue(), getRandomSlotValue(), getRandomSlotValue()];
+    const comienzo = [Date.now(), Date.now(), Date.now()];
 
     function updateSlot(slotIndex) {
-        const currentTime = Date.now();
-        const elapsedTime = currentTime - startTimes[slotIndex];
+        const ahora = Date.now();
+        const tiempTrans = ahora - comienzo[slotIndex];
 
-        if (elapsedTime < spinDuration) {
-            const progress = elapsedTime / spinDuration;
+        if (tiempTrans < spinDuration) {
+            const progress = tiempTrans / spinDuration;
             const randomIndex = Math.floor(Math.random() * 10);
             slotElements[slotIndex].textContent = randomIndex;
             requestAnimationFrame(() => updateSlot(slotIndex));
         } else {
-            slotElements[slotIndex].textContent = targetValues[slotIndex];
+            slotElements[slotIndex].textContent = valores[slotIndex];
 
             if (slotIndex === 2) {
                 checkWin();
@@ -41,13 +41,13 @@ function checkWin() {
         slotElements[0].textContent === slotElements[1].textContent &&
         slotElements[1].textContent === slotElements[2].textContent
     ) {
-        alert("¡Has ganado! Los tres coinciden!");
+        alert("¡Has ganado! Los tres slots coinciden!");
     } else if (
         slotElements[0].textContent === slotElements[1].textContent ||
         slotElements[1].textContent === slotElements[2].textContent ||
         slotElements[0].textContent === slotElements[2].textContent
     ) {
-        alert("¡Has ganado! Coinciden dos slots!");
+        alert("¡Has ganado! Coinciden dos slots");
     }
 }
 
