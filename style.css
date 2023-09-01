@@ -12,6 +12,9 @@
   margin: 0 10px;
   line-height: 100px;
 }
+.slot img{
+  width: 100%;
+}
 
 #spin-btn {
   margin-top: 20px;
