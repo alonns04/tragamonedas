@@ -1,21 +1,20 @@
+body{
+  background-color: rgb(184, 25, 25);
+}
 .slot-machine {
   text-align: center;
-  margin-top: 50px;
+}
+.slot img{
+  background-image: url(./tm-img/velocidad.jpg);
+  background-size: auto;
 }
 
 .slot {
   display: inline-block;
-  font-size: 48px;
-  width: 100px;
-  height: 100px;
-  border: 2px solid black;
-  margin: 0 10px;
-  line-height: 100px;
+  width: 15%;
+  background-color: goldenrod;
+  padding: 8px;
 }
 .slot img{
   width: 100%;
-}
-
-#spin-btn {
-  margin-top: 20px;
 }
